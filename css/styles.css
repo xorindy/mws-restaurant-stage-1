@@ -72,7 +72,7 @@ nav h1 a {
     background-color: #687864;
     font-size: 17px;
     margin: 0;
-    width: calc(50% - 80px);
+    width: 100%;
 }
 
 /* Display list items side by side */
@@ -197,17 +197,16 @@ nav h1 a {
 
 /* ====================== Restaurant Details ====================== */
 .inside header {
-  position: fixed;
+  position: relative;
   top: 0;
   width: 100%;
   z-index: 1000;
 }
 .inside #map-container {
   background: blue none repeat scroll 0 0;
-  height: 87%;
-  position: fixed;
+  height: 400px;
+  position: relative;
   right: 0;
-  top: 80px;
   width: 50%;
 }
 .inside #map {
@@ -218,7 +217,7 @@ nav h1 a {
 .inside #footer {
   bottom: 0;
   position: absolute;
-  width: 50%;
+  width: 100%;
 }
 #restaurant-name {
   color: #687864;
@@ -229,13 +228,19 @@ nav h1 a {
   margin: 15px 0 30px;
   text-transform: uppercase;
   line-height: 1.1;
+  text-align: center;
+  width: 50%;
 }
 #restaurant-img {
-	width: 90%;
+  width: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 #restaurant-address {
   font-size: 12pt;
   margin: 10px 0px;
+  text-align: center;
 }
 #restaurant-cuisine {
   background-color: #5085a5;
@@ -247,13 +252,14 @@ nav h1 a {
   padding: 2px 0;
   text-align: center;
   text-transform: uppercase;
-	width: 90%;
+	width: 100%;
 }
 #restaurant-container, #reviews-container {
   border-bottom: 1px solid #d9d9d9;
   border-top: 1px solid #fff;
   padding: 140px 40px 30px;
   width: 50%;
+  align-content: center;
 }
 #reviews-container {
   padding: 30px 40px 80px;
@@ -264,6 +270,9 @@ nav h1 a {
   font-weight: 300;
   letter-spacing: -1px;
   padding-bottom: 1pt;
+  width: 100%;
+  align-content: center;
+  text-align: center;
 }
 #reviews-list {
   margin: 0;
@@ -279,10 +288,19 @@ nav h1 a {
   padding: 20px 20px 20px;
   position: relative;
   width: 85%;
+  align-content: center;
 }
 #reviews-list li p {
   margin: 0 0 10px;
 }
 #restaurant-hours td {
   color: #666;
+}
+
+#flex-container {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-wrap: column;
 }
