@@ -24,20 +24,55 @@ var cacheFiles = [
 ];
 
 self.addEventListener('install', function(e) {
-    console.log('Service Worker Installed');
-
+    // wait until promise is resolved
     e.waitUntil(
+        // add files to the cache
         caches.open(cacheName).then(function(cache) {
-            console.log('Service Worker Caching cacheFiles');
             return cache.addAll(cacheFiles);
         })
     );
 });
 
 self.addEventListener('activate', function(e) {
-    console.log('Service Worker Activated');
-})
+    e.waitUntil(
+        // get all cache keys
+        caches.keys().then(function(cacheNames) {
+            return Promise.all(cacheNames.map(function(thisCacheName) {
+                // if cached item is saved under a previous cacheName...
+                if(thisCacheName !== cacheName) {
+                    // delete cached file
+                    return caches.delete(thisCacheName);
+                }
+            }));
+        })
+    );
+});
 
 self.addEventListener('fetch', function(e) {
-    console.log('Service Worker Fetching', e.request.url);
-})
+    // respond to fetch event
+    e.respondWith(
+        // check in cache for the request being made
+        caches.match(e.request).then(function(response) {
+            // if found, return cached version
+            if (response) {
+                console.log('Found ', e.request, ' in cache');
+                return response;
+            }
+            else {
+                // if not found, fetch!
+                console.log('Could not find ', e.request, ' in cache, FETCHING~!');
+                return fetch(e.request)
+                .then(function(response) {
+                    const clonedResponse = response.clone();
+                    caches.open('cacheName').then(function(cache) {
+                        cache.put(e.request, response);
+                    })
+                    return response;
+                })
+                .catch(function(err) {
+                    console.error(err);
+                });
+            }
+        })
+    );
+});
