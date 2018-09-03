@@ -1,0 +1,49 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* For Small Screens */
+@media only screen and (min-device-width: 320px) and (max-device-width: 499px) {
+    .filter-selects {
+        margin: 0px 30px;
+    }
+
+    #restaurant-container {
+        flex-flow: column;
+    }
+
+    .restaurant-box {
+        width: 100%;
+    }
+
+    #restaurant-img {
+        height: 200px;
+        width: auto;
+    }
+
+}
+
+/* For Medium Screens */
+@media screen and (min-width: 500px) {
+    #restaurant-list li {
+        max-width: 40%;
+    }
+
+    #restaurant-address {
+        font-size: 12pt;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+/* For Larger Screens */
+@media screen and (min-width: 900px) {
+    .container, .inside {
+        width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #restaurant-list li {
+        max-width: 25%;
+    }
+}
