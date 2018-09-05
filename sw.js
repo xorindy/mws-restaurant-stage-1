@@ -20,7 +20,8 @@ var cacheFiles = [
     '/img/8.jpg',
     '/img/9.jpg',
     '/img/10.jpg',
-    '/img/favicon.ico'
+    '/img/favicon.ico',
+    'https://unpkg.com/leaflet@1.3.1/dist/leaflet.css'
 ];
 
 self.addEventListener('install', function(e) {
@@ -55,17 +56,15 @@ self.addEventListener('fetch', function(e) {
         caches.match(e.request).then(function(response) {
             // if found, return cached version
             if (response) {
-                console.log('Found ', e.request, ' in cache');
                 return response;
             }
             else {
                 // if not found, fetch!
-                console.log('Could not find ', e.request, ' in cache, FETCHING~!');
                 return fetch(e.request)
                 .then(function(response) {
                     const clonedResponse = response.clone();
                     caches.open('cacheName').then(function(cache) {
-                        cache.put(e.request, response);
+                        cache.put(e.request, clonedResponse);
                     })
                     return response;
                 })
